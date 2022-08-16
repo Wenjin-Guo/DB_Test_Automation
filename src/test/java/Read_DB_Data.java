@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 
 public class Read_DB_Data {
@@ -21,7 +22,7 @@ public class Read_DB_Data {
         String[][] DB_data=null;
         int numOfRows;
         int numOfColumns;
-
+        ArrayList<ArrayList<String>> DBdata = new ArrayList<>();
 
         connectionString = "jdbc:mysql://sql5.freesqldatabase.com:3306/sql5512536";
         userName = "sql5512536";
@@ -41,7 +42,22 @@ public class Read_DB_Data {
             System.out.println(numOfRows);
             rs.beforeFirst();
 
-            DB_data = new String[numOfRows][7];
+            int i = 0;
+            while(rs.next()){
+                DBdata.add(new ArrayList<String>());
+                DBdata.get(i).add(rs.getString(1));
+                DBdata.get(i).add(rs.getString(2));
+                DBdata.get(i).add(rs.getString(3));
+                DBdata.get(i).add(rs.getString(4));
+                DBdata.get(i).add(rs.getString(5));
+                DBdata.get(i).add(rs.getString(6));
+                System.out.println("firstName: "+ DBdata.get(i).get(0));
+                i=i+1;
+
+            }
+            //System.out.println("firstName: "+ DBdata.get(0).get(0));
+
+            /*DB_data = new String[numOfRows][7];
             int i=0;
             while(rs.next()){
                 //DB_data[i][0] = rs.getString(0);
@@ -64,7 +80,7 @@ public class Read_DB_Data {
 
                 i=i+1;
             }
-
+*/
 //            System.out.println("Total record rows are: ");
 
 
