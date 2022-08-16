@@ -11,9 +11,10 @@ import java.util.ArrayList;
 
 
 public class Read_DB_Data {
+    ArrayList<ArrayList<String>> DBdata = new ArrayList<>();
 
-    @Test
-    public void FetchDBData() throws Exception {
+
+    public ArrayList FetchDBData() throws Exception {
         String connectionString = null;
         String DBDriver =null;
         String sqlQuery =null;
@@ -22,7 +23,7 @@ public class Read_DB_Data {
         String[][] DB_data=null;
         int numOfRows;
         int numOfColumns;
-        ArrayList<ArrayList<String>> DBdata = new ArrayList<>();
+
 
         connectionString = "jdbc:mysql://sql5.freesqldatabase.com:3306/sql5512536";
         userName = "sql5512536";
@@ -51,11 +52,11 @@ public class Read_DB_Data {
                 DBdata.get(i).add(rs.getString(4));
                 DBdata.get(i).add(rs.getString(5));
                 DBdata.get(i).add(rs.getString(6));
-                System.out.println("firstName: "+ DBdata.get(i).get(0));
+                //System.out.println("firstName: "+ DBdata.get(i).get(0));
                 i=i+1;
 
             }
-            //System.out.println("firstName: "+ DBdata.get(0).get(0));
+            //System.out.println("firstName: "+ DBdata.get(0).size());
 
             /*DB_data = new String[numOfRows][7];
             int i=0;
@@ -88,7 +89,21 @@ public class Read_DB_Data {
             System.out.println("error occurred while connecting to Db: "+ e.getMessage());
         }
 
+        return DBdata;
+    }
 
+    @Test
+    public void passData() throws Exception {
+        ArrayList<ArrayList<String>> DBdata = FetchDBData();
+
+        System.out.println(DBdata.get(0).size());
+
+        for(int i=0; i<DBdata.size();i++){
+            for(int j=0; j<DBdata.get(0).size();j++){
+                System.out.println("firstName: "+DBdata.get(i).get(j));
+            }
+
+        }
     }
 
 
